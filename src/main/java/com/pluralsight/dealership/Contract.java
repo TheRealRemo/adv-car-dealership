@@ -5,8 +5,7 @@ public abstract class Contract {
     private String name;
     private String email;
     private Vehicle vehicleSold;
-    private double totalPrice;
-    private double monthlyPayment;
+
 
 
     public Contract(String date, String name, String email, Vehicle vehicleSold) {
