@@ -223,16 +223,17 @@ public class UserInterface {
             boolean isFinanced = scanner.nextLine().equalsIgnoreCase("yes");
             SalesContract salesContract = new SalesContract(date, name, email, selectedVehicle, isFinanced);
             contractDataManager.saveContract(salesContract);
-        } else if (choice.equalsIgnoreCase("lease")) {
+        } else if (choice.equalsIgnoreCase("lease" ) && LocalDate.now().getYear() - selectedVehicle.getYear() <= 3) {
             LeaseContract leaseContract = new LeaseContract(date, name, email, selectedVehicle);
             contractDataManager.saveContract(leaseContract);
+        }
+        //to validate if vehicle is too old (greater than three years old)
+        else if (choice.equalsIgnoreCase("lease") && LocalDate.now().getYear() - selectedVehicle.getYear() > 3) {
+            System.out.println("This vehicle is too old to lease.");
         }
         else {
             System.out.println("Invalid option");
         }
-
-
-
 
         dealership.removeVehicle(selectedVehicle);
         DealershipFileManager fileManager = new DealershipFileManager();
