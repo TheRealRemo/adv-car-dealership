@@ -38,8 +38,6 @@ public class ContractDataManager {
 
                 bw.newLine();
             }
-
-            System.out.println("Contract saved successfully to contracts.csv.");
         } catch (IOException e) {
             e.printStackTrace();
         }

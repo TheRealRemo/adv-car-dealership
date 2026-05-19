@@ -60,7 +60,6 @@ public class DealershipFileManager {
                 bw.newLine();
             }
 
-            System.out.println("Dealership saved successfully to dealership.csv.");
         } catch (IOException e) {
             e.printStackTrace();
         }

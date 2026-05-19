@@ -1,5 +1,6 @@
 package com.pluralsight.dealership;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -26,6 +27,7 @@ public class UserInterface {
             System.out.println("7. Get all vehicles");
             System.out.println("8. Add vehicle");
             System.out.println("9. Remove vehicle");
+            System.out.println("10. Purchase or Lease a vehicle");
             System.out.println("99. Quit");
 
             System.out.print("Enter your choice: ");
@@ -59,6 +61,8 @@ public class UserInterface {
                 case "9":
                     processRemoveVehicleRequest();
                     break;
+                case "10":
+                    processPurchaseVehicleRequest();
                 case "99":
                     quit = true;
                     break;
@@ -181,6 +185,60 @@ public class UserInterface {
 
         DealershipFileManager manager = new DealershipFileManager();
         manager.saveDealership(dealership);
+    }
+
+    public void processPurchaseVehicleRequest() {
+        List<Vehicle> vehicles = dealership.getAllVehicles();
+        displayVehicles(vehicles);
+        System.out.println("==========================================");
+        System.out.print("Enter the VIN of the vehicle the client is interested in: ");
+        int vin = scanner.nextInt();
+        scanner.nextLine();
+
+        Vehicle selectedVehicle = null;
+        for (Vehicle vehicle : vehicles) {
+            if (vehicle.getVin() == vin) {
+                selectedVehicle = vehicle;
+                break;
+            }
+        }
+
+        if (selectedVehicle == null) {
+            System.out.println("Vehicle not found.");
+            return;
+        }
+
+        System.out.print("Enter client name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter client email: ");
+        String email = scanner.nextLine();
+        System.out.print("Would the client like to purchase or lease?: ");
+        String choice = scanner.nextLine();
+
+        ContractDataManager contractDataManager = new ContractDataManager();
+        String date = LocalDate.now().toString();
+
+        if (choice.equalsIgnoreCase("purchase")) {
+            System.out.print("Would the client like to finance? (yes/no): ");
+            boolean isFinanced = scanner.nextLine().equalsIgnoreCase("yes");
+            SalesContract salesContract = new SalesContract(date, name, email, selectedVehicle, isFinanced);
+            contractDataManager.saveContract(salesContract);
+        } else if (choice.equalsIgnoreCase("lease")) {
+            LeaseContract leaseContract = new LeaseContract(date, name, email, selectedVehicle);
+            contractDataManager.saveContract(leaseContract);
+        }
+        else {
+            System.out.println("Invalid option");
+        }
+
+
+
+
+        dealership.removeVehicle(selectedVehicle);
+        DealershipFileManager fileManager = new DealershipFileManager();
+        fileManager.saveDealership(dealership);
+        System.out.println("Contract saved and vehicle removed from inventory.");
+
     }
 
     private void init() {
