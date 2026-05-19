@@ -61,6 +61,21 @@ public class SalesContract extends Contract {
 
     @Override
     public double getMonthlyPayment() {
-        return 0;
+        double monthlyPayment = 0;
+        double monthlyRate = 0;
+        int numberOfMonths = 0;
+        if (isFinanced && (getTotalPrice() >= 10000)) {
+            numberOfMonths = 48;
+            monthlyRate = 0.0425 / 12;
+             monthlyPayment = getTotalPrice() * monthlyRate * Math.pow(1 + monthlyRate, numberOfMonths)
+                     / (Math.pow(1 + monthlyRate, numberOfMonths) - 1);
+        } else if (isFinanced && (getTotalPrice() <= 10000)) {
+            monthlyRate = 0.0525 / 12;
+            numberOfMonths = 24;
+            monthlyPayment = getTotalPrice() * monthlyRate * Math.pow(1 + monthlyRate, numberOfMonths)
+                    / (Math.pow(1 + monthlyRate, numberOfMonths) - 1);
+        }
+        return monthlyPayment;
     }
 }
+
