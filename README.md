@@ -46,24 +46,16 @@ Outline potential future enhancements or functionalities you might consider addi
 - Additional error catching
 - Additional user input validation
 - Features to examine contracts
-- 
+
 
 ## Resources
 
-List resources such as tutorials, articles, or documentation that helped you during the project.
-
-- [Java Programming Tutorial](https://www.example.com)
-- [Effective Java](https://www.example.com)
-
-## Team Members
-
-- **Name 1** - Specific contributions or roles.
-- **Name 2** - Specific contributions or roles.
+- [Ray Maroun Car Dealership Part 2: Sales & Leasing](https://raymaroun.github.io/yearup-java-visuals/week-06/exercises/car-dealership-v2.html)
 
 ## Thanks
 
-Express gratitude towards those who provided help, guidance, or resources:
 
-- Thank you to [Mentor's Name] for continuous support and guidance.
-- A special thanks to all teammates for their dedication and teamwork.
+
+- Thank you to Potato Sensei for continuous support and guidance.
+
  
